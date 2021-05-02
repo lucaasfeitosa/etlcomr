@@ -10,7 +10,7 @@ sinistrosRecife2019Mod <- sinistrosRecife2019Raw[, -(10:12)]
 
 #verificando o nome das variáveis
 
-names(sinistrosRecife2019Mod)==names(sinistrosRecife2020Raw)
+names(sinistrosRecife2019Mod) == names(sinistrosRecife2020Raw)
 
 #alterando o nome da variável da primeira coluna
 
@@ -41,3 +41,32 @@ naZero <- function(x) {
 # aplica a função naZero a todas as colunas de contagem
 sinistrosRecifeRaw[, 15:25] <- sapply(sinistrosRecifeRaw[, 15:25], naZero)
 
+# exporta em formato nativo do R
+saveRDS(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.rds")
+
+# exporta em formato tabular (.csv) - padrão para interoperabilidade
+write.csv2(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.csv")
+
+#ficamos com staging area?
+
+ls()
+
+# vamos ver quanto cada objeto está ocupando
+
+for (itm in ls()) { 
+  print(formatC(c(itm, object.size(get(itm))), 
+                format = "d", 
+                width = 30), 
+        quote = F)
+}
+
+ls() # lista todos os objetos no R
+
+# agora, vamos remover
+
+gc() # uso explícito do garbage collector
+
+rm(list = c('sinistrosRecife2020Raw', 'sinistrosRecife2021Raw', 'sinistrosRecife2019Raw', 'sinistrosRecife2019Mod'))
+
+saveRDS(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.rds")
+write.csv2(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.csv")
