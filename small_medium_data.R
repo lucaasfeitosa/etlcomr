@@ -37,3 +37,8 @@ system.time(extracaoLD2 <- data.frame(read.csv2("bases_originais/largeData.csv",
 
 # extração via função fread, que já faz amostragem automaticamente
 system.time(extracaoLD3 <- fread(enderecoBase))
+
+#interpretação das colunas
+str(extracaoLD1)
+str(extracaoLD2)
+str(extracaoLD3)
